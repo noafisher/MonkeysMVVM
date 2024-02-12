@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MonkeysMVVM.Views.MonkeysPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MonkeysMVVM.ViewModels"
+    Title="MonkeysPage"
+    x:DataType="vm:MonkeysPageViewModel">
+
+    <ScrollView>
+        <StackLayout>
+            <Button Command="{Binding LoadMonkeyCommand}" Text="Enter Monkeys" />
+            <CollectionView EmptyView="No Monkeys" ItemsSource="{Binding Monkeys}" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
+
