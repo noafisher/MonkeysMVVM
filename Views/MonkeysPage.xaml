@@ -3,6 +3,7 @@
     x:Class="MonkeysMVVM.Views.MonkeysPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MonkeysMVVM.Models"
     xmlns:vm="clr-namespace:MonkeysMVVM.ViewModels"
     Title="MonkeysPage"
     x:DataType="vm:MonkeysPageViewModel">
@@ -10,7 +11,18 @@
     <ScrollView>
         <StackLayout>
             <Button Command="{Binding LoadMonkeyCommand}" Text="Enter Monkeys" />
-            <CollectionView EmptyView="No Monkeys" ItemsSource="{Binding Monkeys}" />
+            <CollectionView EmptyView="No Monkeys" ItemsSource="{Binding Monkeys}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Monkey">
+                        <Frame Padding="5">
+                            <Grid ColumnDefinitions="*,*" RowDefinitions="*">
+                                <Image Aspect="AspectFit" Source="{Binding ImageUrl}" />
+                                <Label Grid.Column="1" Text="{Binding Name}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ScrollView>
 
