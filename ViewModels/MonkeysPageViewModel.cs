@@ -12,9 +12,10 @@ namespace MonkeysMVVM.ViewModels
 {
     public class MonkeysPageViewModel: ViewModel
     {
+        private bool isRefreshing;
         public ObservableCollection<Monkey> Monkeys { get; set; }
         public ICommand LoadMonkeyCommand { get; private set; }
-
+        public bool IsRefreshing { get => isRefreshing; set { isRefreshing = value; OnPropertyChanged(); } }
 
         public MonkeysPageViewModel()
         {
@@ -31,6 +32,7 @@ namespace MonkeysMVVM.ViewModels
             {
                 Monkeys.Add(list[i]);
             }
+                IsRefreshing = false; 
         }
     }
 }
