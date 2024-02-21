@@ -8,29 +8,60 @@
     Title="MonkeysPage"
     x:DataType="vm:MonkeysPageViewModel">
 
-    <ScrollView>
-        <StackLayout>
+    <ScrollView Margin="10">
+        <StackLayout Margin="10" Spacing="5">
+            <Button Command="{Binding GoToMonkeysPageCommand}" Text="Show Monkey Details" />
             <Button Command="{Binding LoadMonkeyCommand}" Text="Enter Monkeys" />
             <RefreshView Command="{Binding LoadMonkeyCommand}" IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView
-                    EmptyView="No Monkeys"
+                    x:Name="cv"
                     ItemsSource="{Binding Monkeys}"
-                    SelectedItem="{Binding Monkeys}"
+                    SelectedItem="{Binding SelectedMonkey}"
                     SelectionMode="Single">
+                    <CollectionView.EmptyView>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="80"
+                                Source="monkey.png"
+                                WidthRequest="80" />
+                            <Label HorizontalOptions="Center" Text="No Monkeys" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Monkey">
-                            <Frame Padding="5">
-                                <Grid ColumnDefinitions="*,*" RowDefinitions="*">
-                                    <Image Aspect="AspectFit" Source="{Binding ImageUrl}" />
-                                    <Label Grid.Column="1" Text="{Binding Name}" />
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem
+                                            Command="{Binding BindingContext.DeleteMonkeyCommand, Source={x:Reference cv}}"
+                                            CommandParameter="{Binding}"
+                                            IconImageSource="trash.png"
+                                            Text="Delete" />
+                                        <SwipeItem IconImageSource="favorite.png" Text="favorite" />
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <Grid
+                                    Margin="10"
+                                    ColumnDefinitions="auto,auto"
+                                    ColumnSpacing="3">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        HeightRequest="100"
+                                        Source="{Binding ImageUrl}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Name}" />
                                 </Grid>
-                            </Frame>
+                            </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
         </StackLayout>
     </ScrollView>
-
 </ContentPage>
 

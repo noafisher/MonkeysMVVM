@@ -1,4 +1,5 @@
 ﻿
+
 using MonkeysMVVM.Models;
 using MonkeysMVVM.Services;
 using System;
@@ -12,12 +13,26 @@ using System.Windows.Input;
 
 namespace MonkeysMVVM.ViewModels
 {
+    [QueryProperty(nameof(Title),"Title")]
+    [QueryProperty(nameof(Monkey), "Monkey")]
     public class ShowMonkeyViewModel:ViewModel
     {
+        private string title;
+        public string Title {  get { return title; } set {  title = value; OnPropertyChanged(); } }
         Monkey monkey;
+        public Monkey Monkey { get => monkey; set { monkey = value; Updatedata(); } }
+
+        private void Updatedata()
+        {
+           Name=Monkey.Name;
+           Location=Monkey.Location;
+            ImageUrl=Monkey.ImageUrl;
+        }
+
         public ICommand ShowMonkeyCommand { get; set; }
         public ICommand ShowMonkeyImage { get; set; }   
         private string name;
+       
         public string Name 
         { 
             get { return this.name; } 
