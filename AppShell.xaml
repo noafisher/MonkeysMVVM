@@ -7,13 +7,12 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar Shell.TabBarUnselectedColor="HotPink">
-        <ShellContent 
-            ContentTemplate="{DataTemplate view:menuPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local:FindMonkeyByLocationPage}" />
         <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MonkeysPage}"
-        Route="MainPage" />
-    
-    
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MonkeysPage}"
+            Route="MainPage" />
+
+
     </TabBar>
 </Shell>
