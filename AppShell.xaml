@@ -6,9 +6,14 @@
     xmlns:local="clr-namespace:MonkeysMVVM.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <TabBar Shell.TabBarUnselectedColor="HotPink">
+        <ShellContent 
+            ContentTemplate="{DataTemplate view:menuPage}"/>
+        <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MonkeysPage}"
         Route="MainPage" />
-
+    
+    
+    </TabBar>
 </Shell>
