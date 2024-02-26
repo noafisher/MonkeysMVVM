@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MonkeysMVVM.Services;
+using MonkeysMVVM.ViewModels;
+using MonkeysMVVM.Views;
 
 namespace MonkeysMVVM;
 
@@ -13,7 +16,17 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+
 			});
+		builder.Services.AddSingleton<MonkeysService>()
+	.AddTransient<FindMonkeyByLocationPage>()
+	.AddTransient<MonkeysPageViewModel>()
+	.AddTransient<ShowMonkeyViewModel>()
+	.AddTransient<MonkeysPage>()
+	.AddTransient<FindMonkeyByLocationPage>()
+	.AddTransient<ShowMonkeyView>();			
+		
+
 
 #if DEBUG
 		builder.Logging.AddDebug();

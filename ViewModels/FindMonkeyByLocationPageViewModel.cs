@@ -11,20 +11,21 @@ namespace MonkeysMVVM.ViewModels
 {
     public class FindMonkeyByLocationPageViewModel : ViewModel
     {
+        private MonkeysService monkeyService;
         private string country;
         private int count;
 
         public string Country { get { return country; } set { country = value; OnPropertyChanged(); ((Command)SearchByCountryCommand).ChangeCanExecute(); } }
         public int Count { get { return count; } set { count = value; OnPropertyChanged(); } }
         public ICommand SearchByCountryCommand { get; set; }
-
         private Monkey monkey;
 
         public string Name { get { return monkey.Name; } }
         public string ImageUrl {  get { return monkey.ImageUrl; } }
 
-        public FindMonkeyByLocationPageViewModel()
+        public FindMonkeyByLocationPageViewModel(MonkeysService M)
         {
+            this.monkeyService = M;
             monkey = new Monkey() { Name = "אין קופים כרגע"} ;
             SearchByCountryCommand = new Command(FindMonkeys,()=> !string.IsNullOrEmpty(Country));
         }
@@ -32,8 +33,8 @@ namespace MonkeysMVVM.ViewModels
         
         private void FindMonkeys()
         {
-            MonkeysService service = new MonkeysService();
-            List<Monkey> lst = service.FindMonkeysByLocation(Country);
+
+            List<Monkey> lst = monkeyService.FindMonkeysByLocation(Country);
             if (lst.Count>0)
                 monkey = lst[0]; 
             else

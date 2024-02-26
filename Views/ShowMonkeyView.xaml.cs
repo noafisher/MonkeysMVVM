@@ -4,9 +4,9 @@ namespace MonkeysMVVM.Views;
 
 public partial class ShowMonkeyView : ContentPage
 {
-	public ShowMonkeyView()
+	public ShowMonkeyView(ShowMonkeyViewModel showMonkeyViewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = new ShowMonkeyViewModel();
+		this.BindingContext = showMonkeyViewModel;
 	}
 }
